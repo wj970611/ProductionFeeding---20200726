@@ -1,0 +1,120 @@
+﻿<Window x:Class="ProduceFeeder.UI.Window4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProduceFeeder.UI"
+        mc:Ignorable="d"
+        Title="Window4" Height="450" Width="800">
+    <Grid>
+        <DataGrid HorizontalAlignment="Left" CanUserAddRows="True" RowHeight="48" Grid.Row="1" 
+                  VerticalAlignment="Top" ItemsSource="{Binding ICMOFeedingView}" ItemTemplate="{DynamicResource BOMItemTemplate1}" 
+                  AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="成品编码">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <TextBlock Grid.Row="0" Text="{Binding Path=FNumber}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="制造车间">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <TextBlock Grid.Row="0" Text="{Binding Path=CJFName}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="计划数量">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <TextBlock Grid.Row="0" Text="{Binding Path=MPSICMO.PlanQty,StringFormat=0}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="套圈">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding Path=OuterRing.FNumber}" VerticalAlignment="Center"  HorizontalAlignment="Left"/>
+                                <Line Grid.Row="1" Stroke="#FFA2A2A2" Stretch="Fill" X2="1" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Path=InnerRing.FNumber}"  VerticalAlignment="Center"  HorizontalAlignment="Left"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="冷辗">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding Path=OuterRing.LNInventoryQty,StringFormat=0}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                                <Line Grid.Row="1" Stroke="#FFA2A2A2" Stretch="Fill" X2="1" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Path=InnerRing.LNInventoryQty,StringFormat=0}"  VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="车加工">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding Path=OuterRing.CJGInventoryQty,StringFormat=0}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                                <Line Grid.Row="1" Stroke="#FFA2A2A2" Stretch="Fill" X2="1" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Path=InnerRing.CJGInventoryQty,StringFormat=0}"  VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="氮化">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding Path=OuterRing.DHInventoryQty,StringFormat=0}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                                <Line Grid.Row="1" Stroke="#FFA2A2A2" Stretch="Fill" X2="1" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Path=InnerRing.DHInventoryQty,StringFormat=0}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="投料数量">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding Path=InnerRing.FeedingQty,StringFormat=0}" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                                <Line Grid.Row="1" Stroke="#FFA2A2A2" Stretch="Fill" X2="1" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Path=OuterRing.FeedingQty,StringFormat=0}"  VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding IsFeedingSync}" ClipboardContentBinding="{x:Null}" Header="工序同步" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

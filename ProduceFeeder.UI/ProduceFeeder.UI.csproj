@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03C10E38-0438-4149-A5C1-C5327555D976}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ProduceFeeder.UI</RootNamespace>
+    <AssemblyName>ProduceFeeder.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Mvvm.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Scheduling.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.WPF.DragDrop, Version=2.0.0.0, Culture=neutral, PublicKeyToken=91f1945125b7a587, processorArchitecture=MSIL">
+      <HintPath>..\packages\gong-wpf-dragdrop.2.2.0\lib\net47\GongSolutions.WPF.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BOMDecompose\BOMDecompose.cs" />
+    <Compile Include="CPComponetInventory.xaml.cs">
+      <DependentUpon>CPComponetInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DBContext\K3BhDBContext.cs" />
+    <Compile Include="DBContext\MyKingdeeDBContext.cs" />
+    <Compile Include="ERKeWindow.xaml.cs">
+      <DependentUpon>ERKeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extension\LinqExtension.cs" />
+    <Compile Include="Interface\ICalCPQty.cs" />
+    <Compile Include="Interface\ICalUseQty.cs" />
+    <Compile Include="Interface\IProduceYCQty.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005110248296_changed-1.cs" />
+    <Compile Include="Migrations\202005110248296_changed-1.Designer.cs">
+      <DependentUpon>202005110248296_changed-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005110307570_changed-2.cs" />
+    <Compile Include="Migrations\202005110307570_changed-2.Designer.cs">
+      <DependentUpon>202005110307570_changed-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005110625120_changed-3.cs" />
+    <Compile Include="Migrations\202005110625120_changed-3.Designer.cs">
+      <DependentUpon>202005110625120_changed-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005110632370_changed-4.cs" />
+    <Compile Include="Migrations\202005110632370_changed-4.Designer.cs">
+      <DependentUpon>202005110632370_changed-4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005110648106_changed-5.cs" />
+    <Compile Include="Migrations\202005110648106_changed-5.Designer.cs">
+      <DependentUpon>202005110648106_changed-5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005250624043_changed_6.cs" />
+    <Compile Include="Migrations\202005250624043_changed_6.Designer.cs">
+      <DependentUpon>202005250624043_changed_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005250643019_changed_7.cs" />
+    <Compile Include="Migrations\202005250643019_changed_7.Designer.cs">
+      <DependentUpon>202005250643019_changed_7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BOMItemQuery\BOMItemQtyQuery.cs" />
+    <Compile Include="Models\BOMItemQuery\CPMaterialQueryBase.cs" />
+    <Compile Include="Models\ItemsContainer\ICMOContainer.cs" />
+    <Compile Include="Models\K3Items\BOMComponentItem.cs" />
+    <Compile Include="Models\K3Items\BOMProcessedItem.cs" />
+    <Compile Include="Models\K3Items\BOMRawItem.cs" />
+    <Compile Include="Models\K3Items\K3CPItemBase.cs" />
+    <Compile Include="Models\K3Items\K3CPItemBaseFactory.cs" />
+    <Compile Include="Models\K3Items\MPSItemBase.cs" />
+    <Compile Include="Models\K3Items\MPSYPItemRCLPrev.cs" />
+    <Compile Include="Models\K3XSZJH.cs" />
+    <Compile Include="Models\K3XSZJHEntry.cs" />
+    <Compile Include="Models\MPSInfoDTO.cs" />
+    <Compile Include="Models\K3MPS.cs" />
+    <Compile Include="Models\PPBOMEntry.cs" />
+    <Compile Include="Models\K3Items\MPSTLItem.cs" />
+    <Compile Include="Models\PurchaseReply.cs" />
+    <Compile Include="Models\QtyInfo\ProPurchaseQtyInfo.cs" />
+    <Compile Include="Models\RclMachine.cs" />
+    <Compile Include="Models\RclRunCalendar.cs" />
+    <Compile Include="Models\RingItem.cs" />
+    <Compile Include="Models\K3Items\BOMItemBase.cs" />
+    <Compile Include="Models\ICBOM.cs" />
+    <Compile Include="Models\ICInventory.cs" />
+    <Compile Include="Interface\IBearingMatch.cs" />
+    <Compile Include="Interface\IMaterialWatcher.cs" />
+    <Compile Include="Models\ItemsContainer\MPSTLContainer.cs" />
+    <Compile Include="Models\ItemsContainer\MPSYPContainer.cs" />
+    <Compile Include="Models\K3Items\BOMItemPurchase.cs" />
+    <Compile Include="Models\ICMORuning.cs" />
+    <Compile Include="Models\K3AuxItem.cs" />
+    <Compile Include="Models\K3Items\K3CPItemBase3.cs" />
+    <Compile Include="Models\K3SongJianDan.cs" />
+    <Compile Include="Models\K3SongJianDanEntry.cs" />
+    <Compile Include="Models\ICMO.cs" />
+    <Compile Include="Models\JHItem.cs" />
+    <Compile Include="Models\K3Dep.cs" />
+    <Compile Include="Models\K3EntityBase.cs" />
+    <Compile Include="Models\K3SubMessage.cs" />
+    <Compile Include="Models\POInventory.cs" />
+    <Compile Include="Models\POOrder.cs" />
+    <Compile Include="Models\K3Items\K3Item.cs" />
+    <Compile Include="Models\QJItem.cs" />
+    <Compile Include="Models\ManufactureShop.cs" />
+    <Compile Include="Models\K3Items\MPSYPItem.cs" />
+    <Compile Include="MPSQueryWindow.xaml.cs">
+      <DependentUpon>MPSQueryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\MPSMainUserControl.xaml.cs">
+      <DependentUpon>MPSMainUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RCLTLWHWindow.xaml.cs">
+      <DependentUpon>RCLTLWHWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\ICMORepository.cs" />
+    <Compile Include="Repository\K3XSZJHRepository.cs" />
+    <Compile Include="Repository\K3MPSRepository.cs" />
+    <Compile Include="Repository\TLScheduleRepository.cs" />
+    <Compile Include="Repository\MPSYPItemRepository.cs" />
+    <Compile Include="Repository\PurchaseReplyRepository.cs" />
+    <Compile Include="SingleWindow.cs" />
+    <Compile Include="userControls\LoadingWait.xaml.cs">
+      <DependentUpon>LoadingWait.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\CPComponetInventoryViewModel.cs" />
+    <Compile Include="ViewModel\ERKeViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MPSMainUserControlViewModel.cs" />
+    <Compile Include="ViewModel\MpsSelecteViewModel.cs" />
+    <Compile Include="Models\K3Items\MPSPlanItem.cs" />
+    <Compile Include="ViewModel\MPSTLViewModel.cs" />
+    <Compile Include="ViewModel\MPSYPFeedingViewModel.cs" />
+    <Compile Include="ViewModel\RCLTLWHViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\YPToScheduleViewModel.cs" />
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MPSTLWindow.xaml.cs">
+      <DependentUpon>MPSTLWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MPSYPFeedingWindow.xaml.cs">
+      <DependentUpon>MPSYPFeedingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TLQueryWindow.xaml.cs">
+      <DependentUpon>TLQueryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window4.xaml.cs">
+      <DependentUpon>Window4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YPToScheduleWindow.xaml.cs">
+      <DependentUpon>YPToScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CPComponetInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ERKeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MPSQueryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="userControls\MPSMainUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MpsSelecteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpsSelecteWindow.xaml.cs">
+      <DependentUpon>MpsSelecteWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="RCLTLWHWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="userControls\LoadingWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MPSTLWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MPSYPFeedingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TLQueryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YPToScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Migrations\202005110248296_changed-1.resx">
+      <DependentUpon>202005110248296_changed-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005110307570_changed-2.resx">
+      <DependentUpon>202005110307570_changed-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005110625120_changed-3.resx">
+      <DependentUpon>202005110625120_changed-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005110632370_changed-4.resx">
+      <DependentUpon>202005110632370_changed-4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005110648106_changed-5.resx">
+      <DependentUpon>202005110648106_changed-5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005250624043_changed_6.resx">
+      <DependentUpon>202005250624043_changed_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005250643019_changed_7.resx">
+      <DependentUpon>202005250643019_changed_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Comparer\" />
+    <Folder Include="DTO\" />
+    <Folder Include="MyERPModel\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\DEL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\deleterow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\deleterow_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\save_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\detail_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\next.png" />
+    <Resource Include="Image\exe2.png" />
+    <Resource Include="Image\next_white.png" />
+    <Resource Include="Image\exe2_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\FT.png" />
+    <Resource Include="Image\FT_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\prev_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\flag_blue.png" />
+    <Resource Include="Image\flag_red.png" />
+    <Resource Include="Image\flag_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\backward_white.png" />
+    <Resource Include="Image\icon-backward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\eraser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\eraser_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\excel_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\history.png" />
+    <Resource Include="Image\history_white.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
