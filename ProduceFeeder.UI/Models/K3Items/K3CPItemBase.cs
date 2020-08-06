@@ -33,6 +33,8 @@ namespace ProduceFeeder.UI.Models.K3Items
         public string K3FModel { get; set; }
         public string K3FName { get; set; }
 
+        public int FCustObjId { get; set; }
+        public int FRoutingId { get; set; }
         public string DepFName { get; set; }
         public int DepId { get; set; }
         public List<BOMItemBase> ComponentItems { get => componentItems; set => componentItems = value; }

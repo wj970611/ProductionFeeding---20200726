@@ -182,7 +182,7 @@
                 <Button Command="{Binding RedFlagCommand}" ToolTip="加急"  Grid.Column="7" Style="{DynamicResource ToolButtonStyle3}" >
                     <Image Source="{Binding IconPath}"/>
                 </Button>
-                <Button Command="{Binding TLCommand}" Grid.Column="10" Style="{DynamicResource ToolButtonStyle3}" ToolTip="投料排班">
+                <Button Command="{Binding MpsTLWindowShow}" Grid.Column="10" Style="{DynamicResource ToolButtonStyle3}" ToolTip="投料排班">
                     <Image Source="/image/exe2_white.png"/>
                 </Button>
             </Grid>

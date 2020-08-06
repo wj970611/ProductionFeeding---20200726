@@ -1,24 +1,23 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using GongSolutions.Wpf.DragDrop;
+using Microsoft.Win32;
 using ProduceFeeder.UI.Models;
-using ProduceFeeder.UI.Models.BOMItemQuery;
 using ProduceFeeder.UI.Models.ItemsContainer;
 using ProduceFeeder.UI.Models.K3Items;
-using ProduceFeeder.UI.Models.YuPai;
 using ProduceFeeder.UI.Repository;
+using ProduceFeeder.UI.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-
 namespace ProduceFeeder.UI.ViewModel
 {
     /// <summary>
@@ -68,10 +67,10 @@ namespace ProduceFeeder.UI.ViewModel
             using (K3BhDBContext k3DBContext = new K3BhDBContext())
             {
                 LoadWaitvisibility = Visibility.Visible;
-               
+
                 PlanProItemView = await new K3MPSRepository().GetAll()
                     .Where(x => x.QJId == qJItem.FItemId)
-                    .Where(x=>x.K3Dep.FName !="制造二科")  
+                    .Where(x => x.K3Dep.FName != "制造二科")
                     .GroupBy(g => new
                     {
                         g.FItemID,
@@ -106,6 +105,11 @@ namespace ProduceFeeder.UI.ViewModel
 
         public List<RingItem> CPRingItemView { get; set; }
         public List<BOMItemBase> BOMItemPurchaseView { get; set; }
+
+
+        public List<BOMItemBase> BOMItemsView { get; set; }
+
+        public BOMItemBase BOMItemsSelected { get; set; }
 
         private MPSPlanItem selectedMpsProItem = new MPSPlanItem();
         public MPSPlanItem SelectedMPSProItem
@@ -165,9 +169,12 @@ namespace ProduceFeeder.UI.ViewModel
             mpsItem.GetProdceYCQty();
             CPRingItemView = mpsItem.CPItem.Rings;
             BOMItemPurchaseView = mpsItem.CPItem.ComponentItems.Where(i => i.ItemTpye == ItemType.Purchase).ToList();
+            BOMItemsView = mpsItem.CPItem.ComponentItems;
 
             RaisePropertyChanged("CPRingItemView");
             RaisePropertyChanged("BOMItemPurchaseView");
+            RaisePropertyChanged("BOMItemsView");
+
         }
 
         private void WorkShopFilterChanged(string value)
@@ -251,6 +258,32 @@ namespace ProduceFeeder.UI.ViewModel
         private void BackWardCommandExec()
         {
             MPSFilterText = mpsFilterText.Remove(mpsFilterText.Length - 1);
+        }
+
+        private RelayCommand refreshTextCommand;
+
+        public RelayCommand RefreshTextCommand
+        {
+            get
+            {
+                if (refreshTextCommand == null)
+                {
+                    refreshTextCommand = new RelayCommand(RefreshTextCommandExec, CanRefreshText);
+                }
+                return refreshTextCommand;
+            }
+        }
+
+        private bool CanRefreshText()
+        {
+            return mpsFilterText.Length > 0;
+        }
+
+        private void RefreshTextCommandExec()
+        {
+            var _txt = mpsFilterText;
+            MPSFilterText = string.Empty;
+            MPSFilterText = _txt;
         }
 
         private RelayCommand filterEraserCommand;
@@ -448,7 +481,55 @@ namespace ProduceFeeder.UI.ViewModel
 
         private void ExportExcelCommandExec()
         {
+            DataTable _dt = new DataTable();
+            _dt.Columns.Add("物料代码");
+            _dt.Columns.Add("物料名称");
+            _dt.Columns.Add("计划数量");
+            _dt.Columns.Add("已投数量");
+            _dt.Columns.Add("可投数量");
+            foreach (var item in MPSListView)
+            {
+                var _item = (MPSPlanItem)item;
+                DataRow _dr = _dt.NewRow();
+                _dr[0] = _item.CPItem.K3FNumber;
+                _dr[1] = _item.CPItem.K3FModel;
+                _dr[2] = _item.PlanTotalQty;
+                _dr[3] = _item.ICMOQty;
+                _dr[4] = _item.RemainQty;
+                _dt.Rows.Add(_dr);
+            }
+            SaveFileDialog _dialog = new SaveFileDialog();
+            _dialog.DefaultExt = ".xlsx";
+            _dialog.Filter = "Excel 文档 (.xlsx)| *.xlsx";
+            var _result = _dialog.ShowDialog();
+            if (_result == true)
+            {
+                
+                    var _xls = new WJJ.PF.Infranstructure.Data.Tools.ExcelHelper(_dialog.FileName);
+                    _xls.DataTableToExcel(_dt, "Sheet1", true);
+             
+                    MessageBox.Show("导出成功!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+               
 
+            }
+        }
+        private RelayCommand copyBOMItemFNumberCommand;
+
+        public RelayCommand CopyBOMItemFNumberCommand
+        {
+            get
+            {
+                if (copyBOMItemFNumberCommand == null)
+                {
+                    copyBOMItemFNumberCommand = new RelayCommand(CopyBOMItemFNumberCommandExec, CanCopyBOMItem);
+                }
+                return copyBOMItemFNumberCommand;
+            }
+        }
+
+        private void CopyBOMItemFNumberCommandExec()
+        {
+            Clipboard.SetText(BOMItemsSelected.K3FNumber);
         }
         private RelayCommand copyItemFNumberCommand;
 
@@ -494,6 +575,29 @@ namespace ProduceFeeder.UI.ViewModel
             Clipboard.SetText(selectedMpsProItem.CPItem.K3FModel);
         }
 
+        private RelayCommand copyBOMItemFNameCommand;
+
+        public RelayCommand CopyBOMItemFNameCommand
+        {
+            get
+            {
+                if (copyBOMItemFNameCommand == null)
+                {
+                    copyBOMItemFNameCommand = new RelayCommand(CopyBOMItemFNameCommandExec, CanCopyBOMItem);
+                }
+                return copyBOMItemFNameCommand;
+            }
+        }
+
+        private bool CanCopyBOMItem()
+        {
+            return BOMItemsSelected != null;
+        }
+
+        private void CopyBOMItemFNameCommandExec()
+        {
+            Clipboard.SetText(BOMItemsSelected.K3FModel);
+        }
 
 
         private RelayCommand copyItemFIDCommand;

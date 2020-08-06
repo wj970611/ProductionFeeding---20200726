@@ -141,7 +141,7 @@ namespace ProduceFeeder.UI.Models
         public List<MPSYPItemRCLPrev> GetYT()
         {
             List<MPSYPItemRCLPrev> lst = new List<MPSYPItemRCLPrev>();  
-            var qq = new Repository.ICMORepository().GetAll().Where(x => x.myBillNo ==BillNo).ToList();
+            var qq = new Repository.ICMORepository().GetAll().Where(x => x.TLBillNo ==BillNo).ToList();
             foreach (var item in qq)
             {
                 lst.Add(new MPSYPItemRCLPrev()

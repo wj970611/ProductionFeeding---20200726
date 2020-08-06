@@ -11,7 +11,10 @@ namespace ProduceFeeder.UI.Models.K3Items
     /// </summary>
     public class BOMProcessedItem : BOMItemBase
     {
+        public BOMProcessedItem()
+        {
   
+        }
         public string ProcessName { get; internal set; }
     }
 }

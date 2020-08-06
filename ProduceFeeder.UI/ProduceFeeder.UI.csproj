@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,7 +35,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -68,8 +76,23 @@
     <Reference Include="GongSolutions.WPF.DragDrop, Version=2.0.0.0, Culture=neutral, PublicKeyToken=91f1945125b7a587, processorArchitecture=MSIL">
       <HintPath>..\packages\gong-wpf-dragdrop.2.2.0\lib\net47\GongSolutions.WPF.DragDrop.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.1\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.1\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
@@ -110,40 +133,20 @@
     <Compile Include="ERKeWindow.xaml.cs">
       <DependentUpon>ERKeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExcelHelper.cs" />
     <Compile Include="Extension\LinqExtension.cs" />
     <Compile Include="Interface\ICalCPQty.cs" />
     <Compile Include="Interface\ICalUseQty.cs" />
     <Compile Include="Interface\IProduceYCQty.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005110248296_changed-1.cs" />
-    <Compile Include="Migrations\202005110248296_changed-1.Designer.cs">
-      <DependentUpon>202005110248296_changed-1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005110307570_changed-2.cs" />
-    <Compile Include="Migrations\202005110307570_changed-2.Designer.cs">
-      <DependentUpon>202005110307570_changed-2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005110625120_changed-3.cs" />
-    <Compile Include="Migrations\202005110625120_changed-3.Designer.cs">
-      <DependentUpon>202005110625120_changed-3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005110632370_changed-4.cs" />
-    <Compile Include="Migrations\202005110632370_changed-4.Designer.cs">
-      <DependentUpon>202005110632370_changed-4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005110648106_changed-5.cs" />
-    <Compile Include="Migrations\202005110648106_changed-5.Designer.cs">
-      <DependentUpon>202005110648106_changed-5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005250624043_changed_6.cs" />
-    <Compile Include="Migrations\202005250624043_changed_6.Designer.cs">
-      <DependentUpon>202005250624043_changed_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005250643019_changed_7.cs" />
-    <Compile Include="Migrations\202005250643019_changed_7.Designer.cs">
-      <DependentUpon>202005250643019_changed_7.cs</DependentUpon>
+    <Compile Include="Migrations\202007031138005_changed-00.cs" />
+    <Compile Include="Migrations\202007031138005_changed-00.Designer.cs">
+      <DependentUpon>202007031138005_changed-00.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BOMItemQuery\BOMItemQtyQuery.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="Models\K3Items\BOMRawItem.cs" />
     <Compile Include="Models\K3Items\K3CPItemBase.cs" />
     <Compile Include="Models\K3Items\K3CPItemBaseFactory.cs" />
+    <Compile Include="Models\K3Items\K3CustObj.cs" />
     <Compile Include="Models\K3Items\MPSItemBase.cs" />
     <Compile Include="Models\K3Items\MPSYPItemRCLPrev.cs" />
     <Compile Include="Models\K3XSZJH.cs" />
@@ -191,9 +195,12 @@
     <Compile Include="Models\QJItem.cs" />
     <Compile Include="Models\ManufactureShop.cs" />
     <Compile Include="Models\K3Items\MPSYPItem.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="MPSQueryWindow.xaml.cs">
       <DependentUpon>MPSQueryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Repository\CustObjReposity.cs" />
+    <Compile Include="Tools\FileTool.cs" />
     <Compile Include="userControls\MPSMainUserControl.xaml.cs">
       <DependentUpon>MPSMainUserControl.xaml</DependentUpon>
     </Compile>
@@ -244,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ERKeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,26 +329,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202005110248296_changed-1.resx">
-      <DependentUpon>202005110248296_changed-1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005110307570_changed-2.resx">
-      <DependentUpon>202005110307570_changed-2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005110625120_changed-3.resx">
-      <DependentUpon>202005110625120_changed-3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005110632370_changed-4.resx">
-      <DependentUpon>202005110632370_changed-4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005110648106_changed-5.resx">
-      <DependentUpon>202005110648106_changed-5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005250624043_changed_6.resx">
-      <DependentUpon>202005250624043_changed_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005250643019_changed_7.resx">
-      <DependentUpon>202005250643019_changed_7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007031138005_changed-00.resx">
+      <DependentUpon>202007031138005_changed-00.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -424,6 +417,13 @@
   <ItemGroup>
     <Resource Include="Image\history.png" />
     <Resource Include="Image\history_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\refresh-line-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\microsoftexcel.png" />
+    <Resource Include="Image\microsoftexcel_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,12 +29,22 @@ namespace ProduceFeeder.UI.Models
 
         private string k3FNumber;
         public int ID { get; set; }
+
         public string K3FNumber
         {
             get => k3FNumber; set
             {if (value != null && value.StartsWith("5.25"))
                 {
                     WorkID = 69;
+                  
+                    if (DXQ=="01")
+                    {
+                        FRoutingId = 1001;
+                    }
+                    if (DXQ=="02")
+                    {
+                        FRoutingId = 1002;
+                    }
                 }
                 else
                 {
@@ -43,6 +53,9 @@ namespace ProduceFeeder.UI.Models
                 k3FNumber = value; 
             }
         }
+         
+        public int  FCustObjId { get; set; }
+        public int FRoutingId { get; set; }
 
         public int WorkID { get; internal set; }
         public string K3FModel { get; set; }
@@ -76,6 +89,7 @@ namespace ProduceFeeder.UI.Models
         /// BOM level
         /// </summary>
         public int Level { get; set; }
+
 
         #region 库存数 
 

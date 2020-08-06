@@ -91,21 +91,23 @@ namespace ProduceFeeder.UI.BOMDecompose
            
             if (_bomitem == null)
             {
-                
+
                 BOMItems.Add(new BOMRawItem
                 {
                     K3ItemID = item.ProChildItem.ID,
                     FBOMQty = item.FChildQty,
                     K3FNumber = item.ProChildItem.FNumber,
                     K3FName = item.FChildName,
+
                     K3FModel = item.ProChildItem.FModel,
                     FScrap = item.FScrap,
                     IsLastOne = true,
                     CPFNumber = _cpFnumber,
-                    ItemTpye = ItemType.Purchase, 
+                    ItemTpye = ItemType.Purchase,
                     Level = _level,
-                    
-                });
+                    FCustObjId = Repository.CustObjReposity.GetItemIdByFNumber(item.ProChildItem.FNumber)
+
+                }) ;
                 //BOMItems.Add(item);
                 return;
             }
@@ -124,7 +126,8 @@ namespace ProduceFeeder.UI.BOMDecompose
                 ProcessName = item.FChildName,
                 DepId = _bomitem.DepID,
                 Level = _level,
-                BOMId = _bomitem.FInterID
+                BOMId = _bomitem.FInterID,
+                FCustObjId = Repository.CustObjReposity.GetItemIdByFNumber(item.ProChildItem.FNumber)
             });
             ReRecursionDecompose(_bomitem);
         }
@@ -156,7 +159,8 @@ namespace ProduceFeeder.UI.BOMDecompose
                             IsLastOne = true,
                             ItemTpye = ItemType.Purchase,
                             DepId = item.DepID,
-                            Level = 1
+                            Level = 1,
+                            FCustObjId = Repository.CustObjReposity.GetItemIdByFNumber(item.ProChildItem.FNumber)
                         });
                     }
                     else
@@ -187,7 +191,8 @@ namespace ProduceFeeder.UI.BOMDecompose
                     CPFNumber = _cpFnumber,
                     ItemTpye = ItemType.Purchase,
                     DepId = item.DepID,
-                    Level = _level
+                    Level = _level,
+                    FCustObjId = Repository.CustObjReposity.GetItemIdByFNumber(item.ProChildItem.FNumber)
                 });
             }
             BOMItems.Add(new BOMProcessedItem
@@ -204,7 +209,8 @@ namespace ProduceFeeder.UI.BOMDecompose
                 ItemTpye = ItemType.Processed,
                 ProcessName = item.FChildName,
                 DepId = item.DepID,
-                Level = _level
+                Level = _level,
+                FCustObjId = Repository.CustObjReposity.GetItemIdByFNumber(item.ProChildItem.FNumber)
             });
             ReRecursionDecompose(_bomitem);
         }

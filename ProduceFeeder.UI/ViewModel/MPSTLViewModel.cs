@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 using ProduceFeeder.UI.Models;
 using ProduceFeeder.UI.Models.ItemsContainer;
 using ProduceFeeder.UI.Models.K3Items;
@@ -7,9 +8,11 @@ using ProduceFeeder.UI.Models.YuPai;
 using ProduceFeeder.UI.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProduceFeeder.UI.ViewModel
 {
@@ -178,6 +181,76 @@ namespace ProduceFeeder.UI.ViewModel
         private void RefreshCommandExec()
         {
             OnQueryChanged();
+        }
+
+
+
+        private RelayCommand exportExcelCommand;
+
+        public RelayCommand ExportExcelCommand
+        {
+            get
+            {
+                if (exportExcelCommand == null)
+                {
+                    exportExcelCommand = new RelayCommand(ExportExcelCommandExec);
+                }
+                return exportExcelCommand;
+            }
+        }
+
+        private void ExportExcelCommandExec()
+        {
+            DataTable _dt = new DataTable();
+            _dt.Columns.Add("目标型号");
+            _dt.Columns.Add("制造车间");
+            _dt.Columns.Add("投料编码");
+            _dt.Columns.Add("投料名称");
+            _dt.Columns.Add("大小圈");
+            _dt.Columns.Add("计划数量");
+            _dt.Columns.Add("投料数量"); 
+            _dt.Columns.Add("要求投料时间");
+            _dt.Columns.Add("炉线"); 
+            _dt.Columns.Add("投料时间"); 
+            _dt.Columns.Add("出料时间"); 
+            _dt.Columns.Add("投料人"); 
+            _dt.Columns.Add("备注"); 
+            _dt.Columns.Add("运行状态"); 
+            _dt.Columns.Add("投料状态");
+            foreach (var item in MPSTLItemsView)
+            { 
+                DataRow _dr = _dt.NewRow();
+                _dr[0] = item.CPItem.K3FNumber;
+                _dr[1] = item.CPItem.DepFName;
+                _dr[2] = item.SubFNumber ;
+                _dr[3] = item.SubFName ;
+                _dr[4] = item.DXQ ;
+                _dr[5] = item.OnePlanQTY ;
+                _dr[6] = item.Qty ;
+                _dr[7] = item. OrderDate.ToString();
+                _dr[8] = item.RclLine;
+                _dr[9] = item.FeedingDate.ToString();
+                _dr[10] = item.OutFeedingDate.ToString();
+                _dr[11] = item.Feeder;
+                _dr[12] = item.Remark;
+                _dr[13] = item.RunningStatus;
+                _dr[14] = item.FeedingType;
+                _dt.Rows.Add(_dr);
+            }
+            SaveFileDialog _dialog = new SaveFileDialog();
+            _dialog.DefaultExt = ".xlsx";
+            _dialog.Filter = "Excel 文档 (.xlsx)| *.xlsx";
+            var _result = _dialog.ShowDialog();
+            if (_result == true)
+            {
+
+                var _xls = new WJJ.PF.Infranstructure.Data.Tools.ExcelHelper(_dialog.FileName);
+                _xls.DataTableToExcel(_dt, "Sheet1", true);
+
+                MessageBox.Show("导出成功!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+            }
         }
 
     }

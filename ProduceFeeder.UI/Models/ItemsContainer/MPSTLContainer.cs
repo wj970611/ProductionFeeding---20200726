@@ -103,7 +103,11 @@ namespace ProduceFeeder.UI.Models.ItemsContainer
                         FItemId = x.K3ItemID,
                         QJId = item.QJId,
                         WorkId =x.WorkID,
-                        UnitID=305
+                        FCostObjId=x.FCustObjId,
+                        FRoutingId=x.FRoutingId,
+                        UnitID=305,
+                        TLBillNo=item.PlanStamp,
+                        CPItemId=cpitem.K3ItemID
                     }.InsertICMO();
                 });
                 //成品
@@ -117,7 +121,11 @@ namespace ProduceFeeder.UI.Models.ItemsContainer
                     FItemId = cpitem.K3ItemID,
                     QJId = item.QJId,
                     WorkId = 55,
-                    UnitID=293
+                    FCostObjId = item.CPItem.FCustObjId,
+                    FRoutingId = item.CPItem.FRoutingId,
+                    UnitID = 293,
+                    TLBillNo = item.PlanStamp,
+                    CPItemId = cpitem.K3ItemID
                 }.InsertICMO();
             } 
                 item.OutFeedingDate=DateTime.Now;

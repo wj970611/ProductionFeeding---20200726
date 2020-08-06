@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.WJJ.ProductionFeeder.Appl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.WJJ.ProductionFeeder.UI", "4.WJJ.ProductionFeeder.UI", "{BDD6DE19-BD57-45B1-AE89-AABDA389BE7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WJJ.ERP.K3.Model", "WJJ.ERP.K3.Model\WJJ.ERP.K3.Model.csproj", "{265B6878-119B-49A7-9733-BF764F3F0ABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WJJ.ERP.K3.Model", "WJJ.ERP.K3.Model\WJJ.ERP.K3.Model.csproj", "{265B6878-119B-49A7-9733-BF764F3F0ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infranstructure.Data", "Infranstructure.Data\Infranstructure.Data.csproj", "{92CFF612-63E6-4E4C-BBEC-C92E05837F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WJJ.PF.Infranstructure.Data", "Infranstructure.Data\WJJ.PF.Infranstructure.Data.csproj", "{92CFF612-63E6-4E4C-BBEC-C92E05837F1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProduceFeeder.UI", "ProduceFeeder.UI\ProduceFeeder.UI.csproj", "{03C10E38-0438-4149-A5C1-C5327555D976}"
 EndProject

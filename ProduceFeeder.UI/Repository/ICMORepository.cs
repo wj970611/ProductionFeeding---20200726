@@ -1,4 +1,5 @@
-﻿using ProduceFeeder.UI.Models;
+﻿using DevExpress.Xpf.Printing.Native;
+using ProduceFeeder.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -84,13 +85,15 @@ namespace ProduceFeeder.UI.Repository
 
         public int Insert(int fworkshop, int fitemid,int workId,
                     decimal fqty, DateTime plancommitDate, DateTime planfinishDate,
-                    int bomInterid, int qj, int unitId,string myBillNo)
+                    int bomInterid, int qj, int unitId,string myBillNo,int froutingid,int fcostobjId,int cpitemId)
         {
+
+            ///routingid  32   FCostObjID 51,
             string _sqlText = "declare @intid int;" +
                 "declare @fillno varchar(100);" +
     "exec GetICMaxNum 'icmo', @intid output;" +
  "exec p_bm_GetBillNo 85,@fillno out;" +
- "Insert icmo(fbrno, [FInterID], [FBillNo], [FTranType], [FStatus]," +
+ "Insert icmo(fbrno, [FInterID], [FBillNo], [FTranType], [FStatus],[FCheckDate]," +
  "            [FMRP], [FType], [FWorkShop], [FItemID], [FQty]," +
  "                    [FCommitQty], [FPlanCommitDate], [FPlanFinishDate]," +
  "                    [FConveyerID], [FCheckerID], [FBillerID], [FSourceEntryID]," +
@@ -118,17 +121,17 @@ namespace ProduceFeeder.UI.Repository
  "                    [FSelDiscardStockInQty], [FDiscardStockInAuxQty], [FDiscardStockInQty]," +
  "                    [FSampleBreakAuxQty], [FSampleBreakQty], [FResourceID], [FAddInterID]," +
  "                    [FAPSImported], [FAPSLastStatus], [FAuxPropID], [FOrderBOMEntryID]," +
- "                    [FIsMakeLowerBill], [FConnectFlag], [FHeadSelfJ01100],[FHeadSelfJ01101])" +
- $"                 values(0, @intid, @fillno, 85, 0," +
+ "                    [FIsMakeLowerBill], [FConnectFlag], [FHeadSelfJ01100], [FHeadSelfJ01101],[TLBillNo])" +
+ $"                 values(0, @intid, @fillno, 85, 0,'{plancommitDate}'," +
  $"                     1052, 1054, {fworkshop}, {fitemid}, {fqty}," +
  $"           0, '{plancommitDate}', '{planfinishDate}'," +
  $"            0, 0, 16394, 0," +
  $"            0, '投料系统添加，数量' + cast({fqty} as nvarchar(255)), {unitId}, 0, {fqty}," +
- $"            0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,{bomInterid}, 0, 0, 0," +
+ $"            0, 0, 0,0, 0, 0, 0,0, 0, {froutingid}, 0,0, 0, 0, 0,{bomInterid}, 0, 0, 0," +
  $"            0, 0, 0, 0,0, 0, 0, 0,{workId}, {fitemid}, 0, 0,0, 0, 0, 0," +
  $"            0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,5, {fqty * 1.05m}, {fqty * 1.05m}, 0," +
  $"            {fqty},{fqty}, 0, 0,0, 0, 14036, '', 0,0, 0, 14215,0, 0, 1059, 0," +
- $"            1, 36820, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0, 0, {qj},'{myBillNo}')";
+ $"            1, 36820, 0, 0,0, 0, 0,0, 0, 0,0, 0, 0, 0,0, 0, 0, 0,0, 0, {qj},{cpitemId},'{myBillNo}')";
 
             return _dbcontext.Database.ExecuteSqlCommand(_sqlText);
         }

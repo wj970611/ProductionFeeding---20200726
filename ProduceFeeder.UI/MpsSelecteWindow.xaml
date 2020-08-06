@@ -10,7 +10,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:Custom="http://www.galasoft.ch/mvvmlight" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
         mc:Ignorable="d"
-        Title="计划选择" Height="960" Width="1400" WindowStartupLocation="CenterScreen">
+        Title="计划选择" Height="860" Width="1400" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Key="DataTemplate1">
             <Border BorderBrush="#FF9DC5E0" BorderThickness="3" CornerRadius="3" Margin="1" d:DesignWidth="74.5">
@@ -217,7 +217,7 @@
                         <RowDefinition Height="344"/>
                     </Grid.RowDefinitions>
                     <TabControl TabStripPlacement="Bottom">
-                        <TabItem Header="仓库信息">
+                        <TabItem Header="库存信息">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="130"/>
@@ -233,9 +233,16 @@
                                         <DataGridTextColumn Binding="{Binding PMWXInventoryQty, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="平面无心" IsReadOnly="True"  />
                                         <DataGridTextColumn Binding="{Binding MJGInventoryQty, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="磨加工" IsReadOnly="True"  />
 
-                                    </DataGrid.Columns> 
+                                    </DataGrid.Columns>
                                 </DataGrid>
                                 <DataGrid BorderBrush="{x:Null}" Background="#FF534F4F" ItemsSource="{Binding BOMItemPurchaseView}" AutoGenerateColumns="False" IsReadOnly="True"  Grid.Row="1">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu StaysOpen="True">
+                                            <MenuItem Header="复制代码"   Command="{Binding CopyItemFNumberCommand}"/>
+                                            <MenuItem Header="复制型号" Command="{Binding CopyItemFModel}"/>
+                                            <MenuItem Header="复制ID"   Command="{Binding CopyItemFIDCommand}"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding K3FNumber}" ClipboardContentBinding="{x:Null}" Header="物料编码" IsReadOnly="True" MinWidth="50"  />
                                         <DataGridTextColumn Binding="{Binding K3FName, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="规格" IsReadOnly="True"  />
@@ -254,14 +261,39 @@
                         <TabItem Header="BOM信息">
                             <Grid Background="#FFE5E5E5">
                                 <Grid>
-                                    <DataGrid HorizontalAlignment="Left" Width="357" ItemsSource="{Binding BOMItems}">
+                                    <DataGrid HorizontalAlignment="Left" Width="509" 
+                                              SelectedItem="{Binding BOMItemsSelected}" 
+                                              ItemsSource="{Binding BOMItemsView}" 
+                                              AutoGenerateColumns="False" IsReadOnly="True">
+                                        <DataGrid.ContextMenu>
+                                            <ContextMenu StaysOpen="True">
+                                                <MenuItem Header="复制代码"   Command="{Binding CopyBOMItemFNumberCommand}"/>
+                                                <MenuItem Header="复制型号" Command="{Binding CopyBOMItemFNameCommand}"/> 
+                                            </ContextMenu>
+                                        </DataGrid.ContextMenu>
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding K3FNumber}" ClipboardContentBinding="{x:Null}" Header="序号" IsReadOnly="True" MinWidth="20"  />
-                                            <DataGridTextColumn Binding="{Binding K3FName, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="规格" IsReadOnly="True" MinWidth="120"   />
-                                            <DataGridTextColumn Binding="{Binding K3FNumber}" ClipboardContentBinding="{x:Null}" Header="物料编码" IsReadOnly="True" MinWidth="120"  />
-                                            <DataGridTextColumn Binding="{Binding K3FName, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="规格" IsReadOnly="True" MinWidth="120"   />
+                                            <DataGridTextColumn Binding="{Binding Level}" ClipboardContentBinding="{x:Null}" Header="序号" IsReadOnly="True" MinWidth="20"  />
+                                            <DataGridTemplateColumn Header="名称" IsReadOnly="True" MinWidth="120"  ClipboardContentBinding="{x:Null}">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <TextBlock Text="{Binding DXQ}" HorizontalAlignment="Center" TextAlignment="Left"></TextBlock>
+                                                            <TextBlock Text="--" ></TextBlock>
+                                                            <TextBlock Text="{Binding K3FName}" HorizontalAlignment="Center" TextAlignment="Left"></TextBlock>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="物料编码" IsReadOnly="True" MinWidth="120"  ClipboardContentBinding="{x:Null}">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding K3FNumber}" HorizontalAlignment="Center" TextAlignment="Left"></TextBlock>
+                                                      </DataTemplate> 
+                                                </DataGridTemplateColumn.CellTemplate> 
+                                            </DataGridTemplateColumn>
+                                            <DataGridTextColumn Binding="{Binding K3FModel, StringFormat=0}" ClipboardContentBinding="{x:Null}" Header="规格" IsReadOnly="True" MinWidth="120"   />
 
-                                        </DataGrid.Columns>
+                                        </DataGrid.Columns> 
                                     </DataGrid>
                                 </Grid>
                             </Grid>
@@ -333,7 +365,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu StaysOpen="True">
                     <MenuItem Header="复制代码"   Command="{Binding CopyItemFNumberCommand}"/>
-                    <MenuItem Header="复制型号" Command="{Binding CopyItemFModel}"/>
+                    <MenuItem Header="复制型号" Command="{Binding CopyItemFNameCommand}"/>
                     <MenuItem Header="复制ID"   Command="{Binding CopyItemFIDCommand}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
@@ -406,7 +438,8 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="23"/>
                 <ColumnDefinition Width="23"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="125"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="199"/>
                 <ColumnDefinition/>
@@ -423,23 +456,26 @@
                 <Image Source="/image/refresh.png"/>
             </Button>
             <Button Command="{Binding ExportExcelCommand}" Background="#FF534A4A" Margin="1,3,4,3" Grid.Column="3" Style="{DynamicResource ToolButtonStyle2}">
-                <Image Source="/image/excel_white.png"/>
+                <Image Source="/image/microsoftexcel_white.png"/>
             </Button>
             <TextBox TextWrapping="NoWrap" Text="{Binding MPSFilterText, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1,1,0,1"  FontSize="16" Grid.Column="5" Margin="0,4"/>
 
             <Button Background="{x:Null}" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="6" Margin="0,4" Command="{Binding BackWardCommand}">
                 <Image Source="/Image/backward_white.png" Margin="0"/>
             </Button>
-            <Button Background="{x:Null}" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="7" Margin="0,4" Command="{Binding FilterEraserCommand}">
+            <Button Background="{x:Null}" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="7" Margin="0,4" Command="{Binding RefreshTextCommand}">
+                <Image Source="/Image/refresh-line-white.png" Margin="0"/>
+            </Button>
+            <Button Background="{x:Null}" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="8" Margin="0,4" Command="{Binding FilterEraserCommand}">
                 <Image Source="/Image/eraser_white.png" Margin="0"/>
             </Button>
             <ComboBox ItemsSource="{Binding QJItemView}" 
-                DisplayMemberPath="FName"  SelectedItem="{Binding SelectedQJItem}" Width="120" HorizontalAlignment="Right" Grid.Column="8" Margin="0,4"/>
-            <ComboBox Grid.Column="9" Margin="15,4" ItemsSource="{Binding WorkShopView}" SelectedItem="{Binding SelectedWorkShop}"/>
+                DisplayMemberPath="FName"  SelectedItem="{Binding SelectedQJItem}" Width="120" HorizontalAlignment="Right" Grid.Column="9" Margin="0,4"/>
+            <ComboBox Grid.Column="10" Margin="15,4" ItemsSource="{Binding WorkShopView}" SelectedItem="{Binding SelectedWorkShop}"/>
 
-            <Button  Content="加入预排" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="11" Background="#FFDCF9D1"  Command="{Binding AddYPCommand}" Margin="5,3"/>
-            <Button  Content="安排投料" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="12" Background="#FFA3FD81"  Command="{Binding AddTLCommand}" Margin="3"/>
-
+            <Button  Content="加入预排" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="12" Background="#FFDCF9D1"  Command="{Binding AddYPCommand}" Margin="5,3"/>
+            <Button  Content="安排投料" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="13" Background="#FFA3FD81"  Command="{Binding AddTLCommand}" Margin="3"/> 
+            <!--<Button  Content="直下生产任务" BorderBrush="#FFABADB3" BorderThickness="0,1,1,1" Grid.Column="14" Background="#FF39BF06"  Command="{Binding AddICMOCommand}" Margin="1,3,0,3" />-->
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="3" d:LayoutOverrides="Height">
             <TextBlock TextWrapping="Wrap" Text="{Binding ItemsSource.Count, ElementName=dg1,StringFormat=共有\{0\}项。}" Foreground="#FFF7F3F3" FontSize="14" Height="22" d:LayoutOverrides="LeftPosition, RightPosition"/>

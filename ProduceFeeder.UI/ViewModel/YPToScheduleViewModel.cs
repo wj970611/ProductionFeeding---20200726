@@ -134,7 +134,27 @@ namespace ProduceFeeder.UI.ViewModel
     private string iconPath = "image/flag_red.png";
     private List<MPSTLItem> feedingItemsView = new List<MPSTLItem>();
 
-    public RelayCommand RedFlagCommand
+
+
+        private RelayCommand mpsTLWindowShow;
+
+        public RelayCommand MpsTLWindowShow
+        {
+            get
+            {
+                if (mpsTLWindowShow == null)
+                {
+                    return mpsTLWindowShow = new RelayCommand(mpsTLWindowShowExec);
+                }
+                return mpsTLWindowShow;
+            }
+        }
+        private void mpsTLWindowShowExec()
+        {
+            Messenger.Default.Send<string>("null", "MpsTLWindowShow");
+        }
+
+        public RelayCommand RedFlagCommand
     {
         get
         {

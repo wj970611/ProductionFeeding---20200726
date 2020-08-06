@@ -95,6 +95,10 @@
                 <Button Command="{Binding RefreshCommand}"   Style="{DynamicResource ToolButtonStyle2}" ToolTip="刷新">
                     <Image Source="/image/refresh.png"/>
                 </Button>
+
+                <Button Command="{Binding ExportExcelCommand}" Style="{DynamicResource ToolButtonStyle2}">
+                    <Image Source="/image/microsoftexcel_white.png"/>
+                </Button>
             </StackPanel>
             <Button Content="投料" Grid.Column="10" HorizontalAlignment="Center" VerticalAlignment="Center"  
                     Command="{Binding FeedingCommand  }"  

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+ 
+
+  <PropertyGroup>
+    <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.1</TargetFrameworkVersion>
+  </PropertyGroup>
+
+ 
+
+  <ItemGroup>
+    <PackageReference Include="NPOI" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WJJ.ERP.K3.Model\WJJ.ERP.K3.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -26,9 +26,11 @@ namespace ProduceFeeder.UI.Models
         public string FBillNo { get; set; }
         [Column("FHeadSelfJ01100")]
         public int? QJId { get; set; }
-
         [Column("FHeadSelfJ01101")]
-        public string myBillNo { get; set; }
+        public int CPItemId  { get; set; }
+
+     
+        public string TLBillNo { get; set; }
         [NotMapped]
         public decimal VaildQty { get => FauxQty - FAuxStockQty; }
         /// <summary>
@@ -73,10 +75,15 @@ namespace ProduceFeeder.UI.Models
         public int FBomInterID { get; set; }
         public int WorkId { get; set; }
         public int UnitID { get; set; }
+
+
+        public int FCostObjId { get; set; }
+        public int FRoutingId { get; set; }
         public  int InsertICMO()
         {   
             return new Repository.ICMORepository().Insert(FWorkShop,FItemId,WorkId,FauxQty,FPlanCommitDate.GetValueOrDefault().Date,
-                            FPlanFinishDate.GetValueOrDefault().Date,FBomInterID,QJId.GetValueOrDefault(), UnitID, myBillNo);
+                            FPlanFinishDate.GetValueOrDefault().Date,FBomInterID,
+                            QJId.GetValueOrDefault(), UnitID, TLBillNo,FRoutingId,FCostObjId,CPItemId);
         }
 
         internal static string MaxFBillNo()

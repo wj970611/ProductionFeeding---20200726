@@ -7,13 +7,13 @@ namespace ProduceFeeder.UI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class changed_7 : IMigrationMetadata
+    public sealed partial class changed00 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changed_7));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changed00));
         
         string IMigrationMetadata.Id
         {
-            get { return "202005250643019_changed_7"; }
+            get { return "202007031138005_changed-00"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ namespace ProduceFeeder.UI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class changed1 : DbMigration
+    public partial class changed00 : DbMigration
     {
         public override void Up()
         {
@@ -15,6 +15,9 @@ namespace ProduceFeeder.UI.Migrations
                         IconPath = c.String(maxLength: 30),
                         HandleStatus = c.Int(nullable: false),
                         XH = c.Int(nullable: false),
+                        LuCode = c.String(),
+                        PCH = c.String(),
+                        LuCode2 = c.String(),
                         FSourceBillNo = c.String(),
                         FSourceInnerID = c.Int(nullable: false),
                         RunningStatus = c.Int(nullable: false),
@@ -24,6 +27,10 @@ namespace ProduceFeeder.UI.Migrations
                         RclLine = c.String(),
                         FeedingType = c.Int(nullable: false),
                         Remark = c.String(),
+                        SubFNumber = c.String(),
+                        SubFName = c.String(),
+                        SubFModel = c.String(),
+                        SubFItemId = c.Int(nullable: false),
                         BillNo = c.String(),
                         QJId = c.Int(nullable: false),
                         OnePlanQTY = c.Int(nullable: false),
@@ -33,13 +40,10 @@ namespace ProduceFeeder.UI.Migrations
                         IsDeleted = c.Boolean(nullable: false),
                         Feeder = c.String(maxLength: 30),
                         CPItem_ID = c.Int(),
-                        SubItem_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.K3CPItemBase", t => t.CPItem_ID)
-                .ForeignKey("dbo.t_ICItem", t => t.SubItem_ID)
-                .Index(t => t.CPItem_ID)
-                .Index(t => t.SubItem_ID);
+                .Index(t => t.CPItem_ID);
             
             CreateTable(
                 "dbo.K3CPItemBase",
@@ -50,38 +54,13 @@ namespace ProduceFeeder.UI.Migrations
                         K3FNumber = c.String(),
                         K3FModel = c.String(),
                         K3FName = c.String(),
+                        FCustObjId = c.Int(nullable: false),
+                        FRoutingId = c.Int(nullable: false),
+                        DepFName = c.String(),
+                        DepId = c.Int(nullable: false),
                         BOMId = c.Int(nullable: false),
-                        K3Dep_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.t_Department", t => t.K3Dep_Id)
-                .Index(t => t.K3Dep_Id);
-            
-            CreateTable(
-                "dbo.t_Department",
-                c => new
-                    {
-                        FItemID = c.Int(nullable: false, identity: true),
-                        FName = c.String(),
-                    })
-                .PrimaryKey(t => t.FItemID);
-            
-            CreateTable(
-                "dbo.t_ICItem",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        FItemID = c.Int(nullable: false),
-                        FNumber = c.String(),
-                        FName = c.String(),
-                        FDeleted = c.Short(nullable: false),
-                        FModel = c.String(),
-                        FSecInv = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        FSource = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.t_Department", t => t.FSource)
-                .Index(t => t.FSource);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.MPSPlanItems",
@@ -115,6 +94,10 @@ namespace ProduceFeeder.UI.Migrations
                         SourceBillNo = c.String(),
                         MaxUseableQty = c.Int(nullable: false),
                         MaxOutputQty = c.Int(nullable: false),
+                        SubFNumber = c.String(),
+                        SubFName = c.String(),
+                        SubFModel = c.String(),
+                        SubFItemId = c.Int(nullable: false),
                         BillNo = c.String(),
                         QJId = c.Int(nullable: false),
                         OnePlanQTY = c.Int(nullable: false),
@@ -124,13 +107,10 @@ namespace ProduceFeeder.UI.Migrations
                         IsDeleted = c.Boolean(nullable: false),
                         Feeder = c.String(maxLength: 30),
                         CPItem_ID = c.Int(),
-                        SubItem_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.K3CPItemBase", t => t.CPItem_ID)
-                .ForeignKey("dbo.t_ICItem", t => t.SubItem_ID)
-                .Index(t => t.CPItem_ID)
-                .Index(t => t.SubItem_ID);
+                .Index(t => t.CPItem_ID);
             
             CreateTable(
                 "dbo.wjj_RclMachine",
@@ -160,27 +140,17 @@ namespace ProduceFeeder.UI.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.RclRunCalendars", "RclID", "dbo.wjj_RclMachine");
-            DropForeignKey("dbo.MPSYPItems", "SubItem_ID", "dbo.t_ICItem");
             DropForeignKey("dbo.MPSYPItems", "CPItem_ID", "dbo.K3CPItemBase");
             DropForeignKey("dbo.MPSPlanItems", "CPItem_ID", "dbo.K3CPItemBase");
-            DropForeignKey("dbo.MPSTLItems", "SubItem_ID", "dbo.t_ICItem");
-            DropForeignKey("dbo.t_ICItem", "FSource", "dbo.t_Department");
             DropForeignKey("dbo.MPSTLItems", "CPItem_ID", "dbo.K3CPItemBase");
-            DropForeignKey("dbo.K3CPItemBase", "K3Dep_Id", "dbo.t_Department");
             DropIndex("dbo.RclRunCalendars", new[] { "RclID" });
-            DropIndex("dbo.MPSYPItems", new[] { "SubItem_ID" });
             DropIndex("dbo.MPSYPItems", new[] { "CPItem_ID" });
             DropIndex("dbo.MPSPlanItems", new[] { "CPItem_ID" });
-            DropIndex("dbo.t_ICItem", new[] { "FSource" });
-            DropIndex("dbo.K3CPItemBase", new[] { "K3Dep_Id" });
-            DropIndex("dbo.MPSTLItems", new[] { "SubItem_ID" });
             DropIndex("dbo.MPSTLItems", new[] { "CPItem_ID" });
             DropTable("dbo.RclRunCalendars");
             DropTable("dbo.wjj_RclMachine");
             DropTable("dbo.MPSYPItems");
             DropTable("dbo.MPSPlanItems");
-            DropTable("dbo.t_ICItem");
-            DropTable("dbo.t_Department");
             DropTable("dbo.K3CPItemBase");
             DropTable("dbo.MPSTLItems");
         }

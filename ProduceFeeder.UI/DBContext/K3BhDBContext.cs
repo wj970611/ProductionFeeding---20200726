@@ -20,7 +20,7 @@ namespace ProduceFeeder.UI
         public DbSet<ICInventory> ICInventories { get; set; }
         public DbSet<ICMO> ICMOs { get; set; }
         public DbSet<QJItem> QJItems { get; set; }
-
+        public DbSet<K3CustObj> CustObjs { get; set; }
         public DbSet<K3SongJianDanEntry> K3SongJianDanEntries { get; set; }
         public DbSet<K3SongJianDan> K3SongJianDans { get; set; }
         public DbSet<K3Dep> K3Deps { get; set; }
